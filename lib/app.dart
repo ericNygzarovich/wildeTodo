@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wildtodo/core/core_utils.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -10,9 +11,15 @@ class AppRoot extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(
+      home: Scaffold(
+        backgroundColor: context.theme.palette.grayscale.g1,
         body: Center(
-          child: Text("Hello"),
+          child: Text(
+            "Hello",
+            style: TextStyle(
+              color: context.theme.palette.grayscale.g6,
+            ),
+          ),
         ),
       ),
     );
