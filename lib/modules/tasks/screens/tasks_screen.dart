@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wildtodo/modules/tasks/widgets/task.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({
@@ -7,6 +8,6 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Task();
   }
 }
