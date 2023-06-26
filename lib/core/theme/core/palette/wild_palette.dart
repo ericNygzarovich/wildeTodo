@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class Palette {
-  const Palette({
+class WildPalette extends Equatable {
+  const WildPalette({
     required this.grayscale,
     required this.accent,
     required this.status,
@@ -10,9 +11,12 @@ class Palette {
   final GreyscaleColors grayscale;
   final AccentColors accent;
   final StatusColors status;
+
+  @override
+  List<Object?> get props => [grayscale, accent, status];
 }
 
-class GreyscaleColors {
+class GreyscaleColors extends Equatable {
   const GreyscaleColors({
     required this.g0,
     required this.g1,
@@ -30,9 +34,12 @@ class GreyscaleColors {
   final Color g4;
   final Color g5;
   final Color g6;
+
+  @override
+  List<Object?> get props => [g0, g1, g2, g3, g4, g5, g6];
 }
 
-class AccentColors {
+class AccentColors extends Equatable {
   const AccentColors({
     required this.primary,
     required this.secondary,
@@ -40,9 +47,12 @@ class AccentColors {
 
   final ColorGroup primary;
   final ColorGroup secondary;
+
+  @override
+  List<Object?> get props => [primary, secondary];
 }
 
-class StatusColors {
+class StatusColors extends Equatable {
   const StatusColors({
     required this.positive,
     required this.negative,
@@ -50,9 +60,12 @@ class StatusColors {
 
   final ColorGroup positive;
   final ColorGroup negative;
+
+  @override
+  List<Object?> get props => [positive, negative];
 }
 
-class ColorGroup {
+class ColorGroup extends Equatable {
   const ColorGroup({
     required this.vivid,
     required this.muted,
@@ -60,4 +73,7 @@ class ColorGroup {
 
   final Color vivid;
   final Color muted;
+
+  @override
+  List<Object?> get props => [vivid, muted];
 }

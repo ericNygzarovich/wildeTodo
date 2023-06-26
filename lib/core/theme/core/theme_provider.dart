@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wildtodo/core/theme/core/app_theme.dart';
+import 'package:wildtodo/core/theme/core/wild_theme.dart';
 
 class ThemeProvider extends InheritedWidget {
   const ThemeProvider({
@@ -8,7 +8,7 @@ class ThemeProvider extends InheritedWidget {
     required this.theme,
   });
 
-  final AppTheme theme;
+  final WildTheme theme;
 
   static ThemeProvider? maybeOf(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<ThemeProvider>();
