@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
+import 'package:wildtodo/modules/home/screens/home_screen.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -12,230 +13,119 @@ class AppRoot extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: SafeArea(
-        child: Scaffold(
-          backgroundColor: context.theme.palette.grayscale.g1,
-          body: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              FontExample(
-                caption: "caption",
-                style: context.theme.typeface.caption.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body1",
-                style: context.theme.typeface.body1.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body2",
-                style: context.theme.typeface.body2.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "subheading",
-                style: context.theme.typeface.subheading.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "title",
-                style: context.theme.typeface.title.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "headline",
-                style: context.theme.typeface.headline.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display1",
-                style: context.theme.typeface.display1.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display2",
-                style: context.theme.typeface.display2.light,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display3",
-                style: context.theme.typeface.display3.light,
-              ),
-              const SizedBox(height: 40),
-              FontExample(
-                caption: "caption",
-                style: context.theme.typeface.caption.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body1",
-                style: context.theme.typeface.body1.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body2",
-                style: context.theme.typeface.body2.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "subheading",
-                style: context.theme.typeface.subheading.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "title",
-                style: context.theme.typeface.title.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "headline",
-                style: context.theme.typeface.headline.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display1",
-                style: context.theme.typeface.display1.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display2",
-                style: context.theme.typeface.display2.regular,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display3",
-                style: context.theme.typeface.display3.regular,
-              ),
-              const SizedBox(height: 40),
-              FontExample(
-                caption: "caption",
-                style: context.theme.typeface.caption.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body1",
-                style: context.theme.typeface.body1.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body2",
-                style: context.theme.typeface.body2.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "subheading",
-                style: context.theme.typeface.subheading.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "title",
-                style: context.theme.typeface.title.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "headline",
-                style: context.theme.typeface.headline.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display1",
-                style: context.theme.typeface.display1.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display2",
-                style: context.theme.typeface.display2.medium,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display3",
-                style: context.theme.typeface.display3.medium,
-              ),
-              const SizedBox(height: 40),
-              FontExample(
-                caption: "caption",
-                style: context.theme.typeface.caption.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body1",
-                style: context.theme.typeface.body1.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "body2",
-                style: context.theme.typeface.body2.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "subheading",
-                style: context.theme.typeface.subheading.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "title",
-                style: context.theme.typeface.title.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "headline",
-                style: context.theme.typeface.headline.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display1",
-                style: context.theme.typeface.display1.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display2",
-                style: context.theme.typeface.display2.bold,
-              ),
-              const SizedBox(height: 8),
-              FontExample(
-                caption: "display3",
-                style: context.theme.typeface.display3.bold,
-              ),
-              const SizedBox(height: 40),
-            ],
-          ),
+        child: HomeNavigationScreen(
+          screens: [
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 1",
+                      style: context.theme.typeface.headline,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 2",
+                      style: context.theme.typeface.headline,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 3",
+                      style: context.theme.typeface.headline,
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                      textAlign: TextAlign.start,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 4",
+                      style: context.theme.typeface.headline,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+          ],
+          navigation: const [
+            HomeNavigationButtonData(
+              title: "Tasks",
+              icon: Icons.message,
+            ),
+            HomeNavigationButtonData(
+              title: "Messsages",
+              icon: Icons.message,
+            ),
+            HomeNavigationButtonData(
+              title: "Friends",
+              icon: Icons.message,
+            ),
+            HomeNavigationButtonData(
+              title: "Notifications",
+              icon: Icons.message,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class FontExample extends StatelessWidget {
-  const FontExample({
-    super.key,
-    required this.caption,
-    required this.style,
-  });
+const text1 = '''Title
+Nisi consequat ut ut adipisicing laborum esse sit. 
+Culpa amet exercitation amet non magna ipsum ut ullamco deserunt culpa eiusmod et. Commodo pariatur ut sint reprehenderit mollit sunt minim.
+  
+Eu culpa anim ad eu veniam. Consectetur exercitation est laboris anim fugiat eu pariatur proident proident ea in elit esse magna. Minim nisi quis ad ea reprehenderit amet ut nulla. Consectetur eiusmod minim sint excepteur non adipisicing.
+Exercitation reprehenderit commodo deserunt excepteur non reprehenderit dolor amet cupidatat ut ut. Consequat aliqua quis cupidatat veniam tempor reprehenderit laborum irure amet laborum. Sunt cillum aute velit enim. Anim ut aliquip ullamco irure proident enim mollit non sunt quis ex magna.
 
-  final String caption;
-  final TextStyle style;
+Officia officia sit ullamco duis. Ex magna velit sunt magna minim pariatur. Magna incididunt velit fugiat incididunt ipsum amet esse consequat et enim ex.
+Dolore aliquip aute nostrud elit deserunt do consequat ea aliqua. Aliquip velit magna cupidatat sunt laboris irure exercitation in incididunt culpa. Incididunt in proident est exercitation aute commodo exercitation irure ad. Enim exercitation enim Lorem consequat labore. Commodo voluptate laborum exercitation ut cupidatat aliquip. Officia anim voluptate eu enim culpa reprehenderit.
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            caption,
-            style: context.theme.typeface.subheading.regular.copyWith(
-              color: context.theme.palette.grayscale.g5,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "Test text",
-            style: style,
-          ),
-        ],
-      ),
-    );
-  }
-}
+Nisi consequat ut ut adipisicing laborum esse sit. 
+Culpa amet exercitation amet non magna ipsum ut ullamco deserunt culpa eiusmod et. Commodo pariatur ut sint reprehenderit mollit sunt minim.
+  
+Eu culpa anim ad eu veniam. Consectetur exercitation est laboris anim fugiat eu pariatur proident proident ea in elit esse magna. Minim nisi quis ad ea reprehenderit amet ut nulla. Consectetur eiusmod minim sint excepteur non adipisicing.
+Exercitation reprehenderit commodo deserunt excepteur non reprehenderit dolor amet cupidatat ut ut. Consequat aliqua quis cupidatat veniam tempor reprehenderit laborum irure amet laborum. Sunt cillum aute velit enim. Anim ut aliquip ullamco irure proident enim mollit non sunt quis ex magna.
+
+Officia officia sit ullamco duis. Ex magna velit sunt magna minim pariatur. Magna incididunt velit fugiat incididunt ipsum amet esse consequat et enim ex.
+Dolore aliquip aute nostrud elit deserunt do consequat ea aliqua. Aliquip velit magna cupidatat sunt laboris irure exercitation in incididunt culpa. Incididunt in proident est exercitation aute commodo exercitation irure ad. Enim exercitation enim Lorem consequat labore. Commodo voluptate laborum exercitation ut cupidatat aliquip. Officia anim voluptate eu enim culpa reprehenderit.
+''';
