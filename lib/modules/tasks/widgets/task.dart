@@ -2,122 +2,152 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
 
+import '../screens/tasks_screen.dart';
+
 class Task extends StatelessWidget {
+  final TaskStatus status;
+  final String time;
+  final String category;
+  final bool isPrivat;
+  final bool details;
+  final bool starred;
+
   const Task({
     super.key,
+    required this.status,
+    required this.isPrivat,
+    required this.category,
+    required this.details,
+    required this.starred,
+    required this.time,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      width: double.infinity,
-      margin: const EdgeInsets.only(left: 5, right: 5),
-      decoration: BoxDecoration(
-        color: context.theme.palette.grayscale.g4,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: const Center(
-        child: ListTile(
-          leading: TaskLeadingWidget(),
-          title: TaskTitleWidget(),
-          subtitle: TaskSubtitleWidget(),
-          trailing: TaskTrailingWidget(),
-          isThreeLine: false,
-        ),
-      ),
-    );
-  }
-}
-
-class TaskTrailingWidget extends StatelessWidget {
-  const TaskTrailingWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    return Container(
-      height: size.width / 12.5,
-      width: size.width / 12.5,
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1,
-          color: context.theme.palette.grayscale.g5,
-        ),
-        borderRadius: BorderRadius.circular(100),
-      ),
-    );
-  }
-}
-
-class TaskSubtitleWidget extends StatelessWidget {
-  const TaskSubtitleWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final Color colorForItem = context.theme.palette.grayscale.g5;
-
-    TextStyle textStyle = TextStyle(
-      color: colorForItem,
-      fontSize: size.width / 36,
-    );
-
-    return Row(
-      children: [
-        Text('Importance', style: textStyle),
-        const SizedBox(width: 5),
-        Icon(CupertinoIcons.bell_solid,
-            color: colorForItem, size: size.width / 34),
-        Text('12:00 AM', style: textStyle),
-      ],
-    );
-  }
-}
-
-class TaskLeadingWidget extends StatelessWidget {
-  const TaskLeadingWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    Widget trealing = status != TaskStatus.undone
+        ? Container(
+            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 7),
+            margin: const EdgeInsets.only(right: 16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: status == TaskStatus.failed
+                  ? context.theme.palette.status.negative.vivid
+                  : context.theme.palette.status.positive.vivid,
+            ),
+            child: status == TaskStatus.failed
+                ? Icon(
+                    Icons.clear,
+                    size: 18,
+                    color: context.theme.palette.grayscale.g6,
+                  )
+                : Icon(
+                    Icons.check,
+                    size: 20,
+                    color: context.theme.palette.grayscale.g6,
+                  ),
+          )
+        : Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: SizedBox(
+              height: 30,
+              width: 30,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: context.theme.palette.grayscale.g5,
+                  ),
+                  borderRadius: BorderRadius.circular(100),
+                ),
+              ),
+            ),
+          );
 
     return Container(
-      height: size.width / 8.2,
-      width: size.width / 8.2,
+      margin: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: context.theme.palette.status.negative.vivid,
-        borderRadius: BorderRadius.circular(16),
+        color: status != TaskStatus.undone
+            ? context.theme.palette.grayscale.g3
+            : context.theme.palette.grayscale.g4,
+        borderRadius: BorderRadius.circular(15),
       ),
-      child: Icon(
-        Icons.analytics_sharp,
-        color: context.theme.palette.grayscale.g6,
-        size: size.width / 12.4,
-      ),
-    );
-  }
-}
-
-class TaskTitleWidget extends StatelessWidget {
-  const TaskTitleWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    return Text(
-      'Learn 650 words at summer',
-      style: TextStyle(
-        color: context.theme.palette.grayscale.g6,
-        fontWeight: FontWeight.w500,
-        fontSize: size.width / 30.5,
+      child: Row(
+        children: [
+          isPrivat
+              ? Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 22),
+                  child: Icon(
+                    CupertinoIcons.eye_slash_fill,
+                    color: context.theme.palette.grayscale.g5,
+                  ),
+                )
+              : Container(
+                  margin: const EdgeInsets.only(
+                      top: 12, bottom: 12, left: 12, right: 10),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: context.theme.palette.status.negative.vivid,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Icon(
+                    CupertinoIcons.doc_text,
+                    color: context.theme.palette.grayscale.g6,
+                  ),
+                ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Learn 650 words at summer',
+                  style: TextStyle(
+                    color: context.theme.palette.grayscale.g6,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Wrap(
+                  spacing: 4,
+                  children: [
+                    if (details)
+                      Icon(
+                        CupertinoIcons.doc_text,
+                        size: 14,
+                        color: context.theme.palette.grayscale.g5,
+                      ),
+                    if (category.isNotEmpty)
+                      Text(
+                        category,
+                        style: TextStyle(
+                          color: context.theme.palette.grayscale.g5,
+                        ),
+                      ),
+                    if (time.isNotEmpty) ...[
+                      Icon(
+                        CupertinoIcons.bell_fill,
+                        size: 14,
+                        color: context.theme.palette.grayscale.g5,
+                      ),
+                      Text(
+                        time,
+                        style: TextStyle(
+                          color: context.theme.palette.grayscale.g5,
+                        ),
+                      ),
+                    ],
+                    if (starred)
+                      Icon(
+                        Icons.star,
+                        size: 14,
+                        color: context.theme.palette.accent.secondary.vivid,
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          trealing,
+        ],
       ),
     );
   }
