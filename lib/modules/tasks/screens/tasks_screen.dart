@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/modules/tasks/widgets/task.dart';
 
+enum TaskStatus {
+  undone,
+  success,
+  failed,
+}
+
 class TasksScreen extends StatelessWidget {
   const TasksScreen({
     super.key,
@@ -23,10 +29,4 @@ class TasksScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-enum TaskStatus {
-  undone,
-  success,
-  failed,
 }

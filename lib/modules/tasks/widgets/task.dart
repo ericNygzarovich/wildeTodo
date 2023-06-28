@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:wildtodo/core/core_utils.dart';
 
 import '../screens/tasks_screen.dart';
@@ -89,10 +90,7 @@ class Task extends StatelessWidget {
                     color: context.theme.palette.status.negative.vivid,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Icon(
-                    CupertinoIcons.doc_text,
-                    color: context.theme.palette.grayscale.g6,
-                  ),
+                  child: SvgPicture.asset('assets/icons/task.svg'),
                 ),
           Expanded(
             child: Column(
@@ -110,10 +108,16 @@ class Task extends StatelessWidget {
                   spacing: 4,
                   children: [
                     if (details)
-                      Icon(
-                        CupertinoIcons.doc_text,
-                        size: 14,
-                        color: context.theme.palette.grayscale.g5,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1),
+                        child: SvgPicture.asset(
+                          width: 12,
+                          'assets/icons/task.svg',
+                          colorFilter: ColorFilter.mode(
+                            context.theme.palette.grayscale.g5,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                       ),
                     if (category.isNotEmpty)
                       Text(
