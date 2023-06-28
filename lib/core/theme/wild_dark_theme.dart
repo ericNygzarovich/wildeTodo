@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:wildtodo/core/theme/core/app_theme.dart';
-import 'package:wildtodo/core/theme/core/palette.dart';
+import 'package:wildtodo/core/theme/core/typeface/wild_font_builder.dart';
+import 'package:wildtodo/core/theme/core/typeface/wild_typeface.dart';
+import 'package:wildtodo/core/theme/core/wild_theme.dart';
+import 'package:wildtodo/core/theme/core/palette/wild_palette.dart';
 
-class WildDarkTheme extends Equatable implements AppTheme {
-  const WildDarkTheme();
-
+class WildDarkTheme extends Equatable implements WildTheme {
   @override
-  final Palette palette = const Palette(
+  final WildPalette palette = const WildPalette(
     grayscale: GreyscaleColors(
       g0: Color(0xFF1B1B1E),
       g1: Color(0xFF1F1F25),
@@ -40,5 +40,13 @@ class WildDarkTheme extends Equatable implements AppTheme {
   );
 
   @override
-  List<Object> get props => [palette];
+  final WildTypeface typeface = WildTypeface(
+    fontBuilder: const WildFontBuilder(
+      fontFamily: "Outfit",
+      defaultColor: Color(0xFFFFFFFF),
+    ),
+  );
+
+  @override
+  List<Object> get props => [palette, typeface];
 }
