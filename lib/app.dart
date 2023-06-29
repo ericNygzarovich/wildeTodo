@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
+import 'package:wildtodo/modules/tasks/screens/tasks_screen.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -13,14 +14,7 @@ class AppRoot extends StatelessWidget {
       ),
       home: Scaffold(
         backgroundColor: context.theme.palette.grayscale.g1,
-        body: Center(
-          child: Text(
-            "Hello",
-            style: TextStyle(
-              color: context.theme.palette.grayscale.g6,
-            ),
-          ),
-        ),
+        body: const Center(child: TasksScreen()),
       ),
     );
   }

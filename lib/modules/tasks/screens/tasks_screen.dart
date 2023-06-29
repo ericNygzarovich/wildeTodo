@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/modules/tasks/widgets/task.dart';
 
-enum TaskStatus {
-  undone,
-  success,
-  failed,
-}
+import '../../../models/enum_for_task_widget.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({
@@ -16,13 +12,15 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: 4,
-      itemBuilder: (context, index) => const Task(
-        status: TaskStatus.undone,
-        time: '12:00 AM',
-        category: 'Importance',
-        isPrivat: false,
-        starred: true,
-        details: true,
+      itemBuilder: (context, index) => const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        child: Task(
+          status: TaskStatus.failed,
+          time: '12:00 AM',
+          category: 'Importance',
+          isPrivat: true,
+          isStarred: true,
+        ),
       ),
       separatorBuilder: (context, index) => const SizedBox(
         height: 5,
