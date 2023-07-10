@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wildtodo/core/core_utils.dart';
 import 'package:wildtodo/modules/tasks/widgets/subtitle.dart';
 import 'package:wildtodo/modules/tasks/widgets/task_status_widget.dart';
 
-import '../../../models/enum_for_task_widget.dart';
+enum TaskStatus {
+  undone,
+  success,
+  failed,
+}
 
 class Task extends StatelessWidget {
   final TaskStatus status;
@@ -33,26 +38,25 @@ class Task extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          isPrivat
-              ? Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 24, horizontal: 22),
-                  child: Icon(
+          Container(
+            margin:
+                const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 10),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: isPrivat
+                  ? Colors.transparent
+                  : context.theme.palette.status.negative.vivid,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: isPrivat
+                ? Icon(
                     CupertinoIcons.eye_slash_fill,
                     color: context.theme.palette.grayscale.g5,
-                  ),
-                )
-              : Container(
-                  margin: const EdgeInsets.only(
-                      top: 12, bottom: 12, left: 12, right: 10),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: context.theme.palette.status.negative.vivid,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: SvgPicture.asset('assets/icons/task.svg'),
-                ),
+                  )
+                : SvgPicture.asset('assets/icons/task.svg'),
+          ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +78,10 @@ class Task extends StatelessWidget {
               ],
             ),
           ),
-          TaskStatusWidget(status: status),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 16, 21.5, 21.5),
+            child: TaskStatusWidget(status: status),
+          ),
         ],
       ),
     );

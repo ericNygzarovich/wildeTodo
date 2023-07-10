@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
-
-import '../../../models/enum_for_task_widget.dart';
+import 'package:wildtodo/modules/tasks/widgets/task.dart';
 
 class TaskStatusWidget extends StatelessWidget {
   final TaskStatus status;
@@ -14,8 +13,8 @@ class TaskStatusWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 7),
-      margin: const EdgeInsets.only(right: 16),
+      height: 25,
+      width: 25,
       decoration: BoxDecoration(
         border: Border.all(
           color: status == TaskStatus.undone

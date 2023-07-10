@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/modules/tasks/widgets/task.dart';
 
-import '../../../models/enum_for_task_widget.dart';
-
 class TasksScreen extends StatelessWidget {
   const TasksScreen({
     super.key,
