@@ -38,24 +38,26 @@ class Task extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            margin:
+          Padding(
+            padding:
                 const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 10),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: isPrivat
-                  ? Colors.transparent
-                  : context.theme.palette.status.negative.vivid,
-              borderRadius: BorderRadius.circular(16),
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: isPrivat
+                    ? Colors.transparent
+                    : context.theme.palette.status.negative.vivid,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: isPrivat
+                  ? Icon(
+                      CupertinoIcons.eye_slash_fill,
+                      color: context.theme.palette.grayscale.g5,
+                    )
+                  : SvgPicture.asset('assets/icons/task.svg'),
             ),
-            child: isPrivat
-                ? Icon(
-                    CupertinoIcons.eye_slash_fill,
-                    color: context.theme.palette.grayscale.g5,
-                  )
-                : SvgPicture.asset('assets/icons/task.svg'),
           ),
           Expanded(
             child: Column(
@@ -71,6 +73,17 @@ class Task extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Subtitle(
+                  categoryIcon: Padding(
+                    padding: const EdgeInsets.only(top: 1),
+                    child: SvgPicture.asset(
+                      width: 12,
+                      'assets/icons/task.svg',
+                      colorFilter: ColorFilter.mode(
+                        context.theme.palette.grayscale.g5,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
                   category: category,
                   isStarred: isStarred,
                   time: time,
