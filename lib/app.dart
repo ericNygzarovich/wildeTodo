@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
-import 'package:wildtodo/modules/home/screens/home_screen.dart';
+import 'package:wildtodo/modules/tasks/screens/tasks_screen.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -12,99 +12,9 @@ class AppRoot extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SafeArea(
-        child: HomeNavigationScreen(
-          screens: [
-            CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Text(
-                      "Page 1",
-                      style: context.theme.typeface.headline,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      text1,
-                      style: context.theme.typeface.body2,
-                    ),
-                  ]),
-                ),
-              ],
-            ),
-            CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Text(
-                      "Page 2",
-                      style: context.theme.typeface.headline,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      text1,
-                      style: context.theme.typeface.body2,
-                    ),
-                  ]),
-                ),
-              ],
-            ),
-            CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Text(
-                      "Page 3",
-                      style: context.theme.typeface.headline,
-                      textAlign: TextAlign.start,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      text1,
-                      style: context.theme.typeface.body2,
-                      textAlign: TextAlign.start,
-                    ),
-                  ]),
-                ),
-              ],
-            ),
-            CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Text(
-                      "Page 4",
-                      style: context.theme.typeface.headline,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      text1,
-                      style: context.theme.typeface.body2,
-                    ),
-                  ]),
-                ),
-              ],
-            ),
-          ],
-          navigation: const [
-            HomeNavigationButtonData(
-              title: "Tasks",
-              icon: Icons.message,
-            ),
-            HomeNavigationButtonData(
-              title: "Messsages",
-              icon: Icons.message,
-            ),
-            HomeNavigationButtonData(
-              title: "Friends",
-              icon: Icons.message,
-            ),
-            HomeNavigationButtonData(
-              title: "Notifications",
-              icon: Icons.message,
-            ),
-          ],
-        ),
+      home: Scaffold(
+        backgroundColor: context.theme.palette.grayscale.g1,
+        body: const Center(child: TasksScreen()),
       ),
     );
   }
