@@ -62,7 +62,7 @@ class Task extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Learn 650 words at summer',
+                  'Learn 655 words at summer',
                   textAlign: TextAlign.start,
                   style: context.theme.typeface.body2.medium.copyWith(
                     color: context.theme.palette.grayscale.g6,
