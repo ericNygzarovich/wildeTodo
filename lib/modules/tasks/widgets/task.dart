@@ -31,6 +31,7 @@ class Task extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 10),
       decoration: BoxDecoration(
         color: status != TaskStatus.undone
             ? context.theme.palette.grayscale.g3
@@ -40,24 +41,20 @@ class Task extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 12, bottom: 12, left: 12, right: 10),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: isPrivat
-                    ? Colors.transparent
-                    : context.theme.palette.status.negative.vivid,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: isPrivat
-                  ? Icon(
-                      CupertinoIcons.eye_slash_fill,
-                      color: context.theme.palette.grayscale.g5,
-                    )
-                  : SvgPicture.asset('assets/icons/task.svg'),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: isPrivat
+                  ? Colors.transparent
+                  : context.theme.palette.status.negative.vivid,
+              borderRadius: BorderRadius.circular(16),
             ),
+            child: isPrivat
+                ? Icon(
+                    CupertinoIcons.eye_slash_fill,
+                    color: context.theme.palette.grayscale.g5,
+                  )
+                : SvgPicture.asset('assets/icons/task.svg'),
           ),
           Expanded(
             child: Column(
@@ -71,17 +68,14 @@ class Task extends StatelessWidget {
                     color: context.theme.palette.grayscale.g6,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 5),
                 Subtitle(
-                  categoryIcon: Padding(
-                    padding: const EdgeInsets.only(top: 1),
-                    child: SvgPicture.asset(
-                      width: 12,
-                      'assets/icons/task.svg',
-                      colorFilter: ColorFilter.mode(
-                        context.theme.palette.grayscale.g5,
-                        BlendMode.srcIn,
-                      ),
+                  categoryIcon: SvgPicture.asset(
+                    width: 12,
+                    'assets/icons/task.svg',
+                    colorFilter: ColorFilter.mode(
+                      context.theme.palette.grayscale.g5,
+                      BlendMode.srcIn,
                     ),
                   ),
                   category: category,
@@ -91,10 +85,8 @@ class Task extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 16, 21.5, 21.5),
-            child: TaskStatusWidget(status: status),
-          ),
+          TaskStatusWidget(status: status),
+          const SizedBox(width: 16)
         ],
       ),
     );

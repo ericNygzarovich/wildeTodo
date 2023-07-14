@@ -18,7 +18,7 @@ class Subtitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         SubtitleItem(
           title: category,
