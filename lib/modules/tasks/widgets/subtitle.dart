@@ -55,7 +55,8 @@ class SubtitleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (icon != null) icon!,
         const SizedBox(width: 4),
