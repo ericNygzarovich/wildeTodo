@@ -46,9 +46,8 @@ PreferredSizeWidget? getAppBar(BuildContext context) {
           child: CustomPaint(
             painter: ProgreesCircule(context: context, percent: 0.45),
             child: Center(
-              child: ClipRRect(
+              child: ClipOval(
                 clipBehavior: Clip.hardEdge,
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
                 child: Image.asset(
                   'assets/images/default_avata_image.png',
                   fit: BoxFit.fill,
