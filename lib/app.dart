@@ -1,9 +1,6 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
-import 'package:wildtodo/modules/tasks/screen/tasks_screen.dart';
+import 'package:wildtodo/modules/home/screens/home_screen.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -15,103 +12,101 @@ class AppRoot extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        drawer: const Drawer(),
-        appBar: getAppBar(context),
-        backgroundColor: context.theme.palette.grayscale.g1,
-        body: const Center(child: TasksScreen()),
-      ),
-    );
-  }
-}
-
-PreferredSizeWidget? getAppBar(BuildContext context) {
-  return AppBar(
-    iconTheme: IconThemeData(color: context.theme.palette.grayscale.g5),
-    backgroundColor: context.theme.palette.grayscale.g1,
-    title: Text(
-      'March 2023',
-      style: context.theme.typeface.subheading.bold,
-    ),
-    actions: [
-      Icon(
-        CupertinoIcons.bell_fill,
-        color: context.theme.palette.grayscale.g5,
-        size: 16,
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(16, 7, 24, 7),
-        child: SizedBox(
-          width: 42,
-          child: CustomPaint(
-            painter: ProgreesCircule(context: context, percent: 0.45),
-            child: Center(
-              child: ClipOval(
-                clipBehavior: Clip.hardEdge,
-                child: Image.asset(
-                  'assets/images/default_avata_image.png',
-                  fit: BoxFit.fill,
-                  height: 30,
-                  width: 30,
+      home: SafeArea(
+        child: HomeNavigationScreen(
+          screens: [
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 1",
+                      style: context.theme.typeface.headline,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                    ),
+                  ]),
                 ),
-              ),
+              ],
             ),
-          ),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 2",
+                      style: context.theme.typeface.headline,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 3",
+                      style: context.theme.typeface.headline,
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                      textAlign: TextAlign.start,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Text(
+                      "Page 4",
+                      style: context.theme.typeface.headline,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      text1,
+                      style: context.theme.typeface.body2,
+                    ),
+                  ]),
+                ),
+              ],
+            ),
+          ],
+          navigation: const [
+            HomeNavigationButtonData(
+              title: "Tasks",
+              icon: Icons.message,
+            ),
+            HomeNavigationButtonData(
+              title: "Messsages",
+              icon: Icons.message,
+            ),
+            HomeNavigationButtonData(
+              title: "Friends",
+              icon: Icons.message,
+            ),
+            HomeNavigationButtonData(
+              title: "Notifications",
+              icon: Icons.message,
+            ),
+          ],
         ),
-      )
-    ],
-  );
-}
-
-class ProgreesCircule extends CustomPainter {
-  final BuildContext context;
-  final double percent;
-
-  ProgreesCircule({
-    required this.context,
-    required this.percent,
-  });
-
-  void _fillArcPaint(Canvas canvas, Size size) {
-    final arcFill = Paint();
-    arcFill.color = context.theme.palette.accent.secondary.vivid;
-    arcFill.style = PaintingStyle.stroke;
-    arcFill.strokeCap = StrokeCap.round;
-    arcFill.strokeWidth = 4;
-
-    canvas.drawArc(
-      const Offset(0, 0) & Size(size.width, size.height),
-      -pi / 2,
-      pi * 2 * percent,
-      false,
-      arcFill,
+      ),
     );
-  }
-
-  void _spaceArcPaint(Canvas canvas, Size size) {
-    final arcSpace = Paint();
-    arcSpace.color = context.theme.palette.grayscale.g5;
-    arcSpace.style = PaintingStyle.stroke;
-    arcSpace.strokeWidth = 4;
-
-    canvas.drawArc(
-      const Offset(0, 0) & Size(size.width, size.height),
-      pi * 2 * percent - (pi / 2),
-      pi * 2 * (1 - percent),
-      false,
-      arcSpace,
-    );
-  }
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    _spaceArcPaint(canvas, size);
-    _fillArcPaint(canvas, size);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }
 
