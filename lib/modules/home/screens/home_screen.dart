@@ -74,7 +74,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen> {
     return Scaffold(
       backgroundColor: context.theme.palette.grayscale.g1,
       drawer: const Drawer(),
-      appBar: getAppBar(context),
+      appBar: const WildAppBar(),
       body: Column(
         children: [
           Expanded(
@@ -118,50 +118,78 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen> {
   }
 }
 
-PreferredSizeWidget? getAppBar(BuildContext context) {
-  return AppBar(
-    iconTheme: IconThemeData(color: context.theme.palette.grayscale.g5),
-    backgroundColor: context.theme.palette.grayscale.g1,
-    title: Text(
-      'March 2023',
-      style: context.theme.typeface.subheading.bold,
-    ),
-    actions: [
-      Icon(
-        CupertinoIcons.bell_fill,
-        color: context.theme.palette.grayscale.g5,
-        size: 16,
+class WildAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const WildAppBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      iconTheme: IconThemeData(color: context.theme.palette.grayscale.g5),
+      backgroundColor: context.theme.palette.grayscale.g1,
+      title: Text(
+        'March 2023',
+        style: context.theme.typeface.subheading.bold,
       ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(16, 7, 24, 7),
-        child: SizedBox(
-          width: 42,
-          child: CustomPaint(
-            painter: ProgreesCircule(context: context, percent: 0.45),
-            child: Center(
-              child: ClipRRect(
-                clipBehavior: Clip.hardEdge,
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-                child: Image.asset(
-                  'assets/images/default_avata_image.png',
-                  fit: BoxFit.fill,
-                  height: 30,
-                  width: 30,
-                ),
-              ),
+      actions: [
+        Icon(
+          CupertinoIcons.bell_fill,
+          color: context.theme.palette.grayscale.g5,
+          size: 16,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 7, 24, 7),
+          child: SizedBox(
+            width: 42,
+            child: ProgressCirculWidget(
+              painter: ProgreesCirculePainter(context: context, percent: 0.70),
             ),
           ),
-        ),
-      )
-    ],
-  );
+        )
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size(double.infinity, 60);
 }
 
-class ProgreesCircule extends CustomPainter {
+class ProgressCirculWidget extends StatelessWidget {
+  final Widget? image;
+  final CustomPainter? painter;
+
+  const ProgressCirculWidget({
+    required this.painter,
+    this.image,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: painter,
+      child: Center(
+        child: ClipOval(
+          clipBehavior: Clip.hardEdge,
+          child: image ??
+              Image.asset(
+                'assets/images/default_avata_image.png',
+                fit: BoxFit.fill,
+                height: 30,
+                width: 30,
+              ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProgreesCirculePainter extends CustomPainter {
   final BuildContext context;
   final double percent;
 
-  ProgreesCircule({
+  ProgreesCirculePainter({
     required this.context,
     required this.percent,
   });
