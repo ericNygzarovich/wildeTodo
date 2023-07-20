@@ -138,12 +138,12 @@ class WildAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: context.theme.palette.grayscale.g5,
           size: 16,
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 7, 24, 7),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 7, 24, 7),
           child: SizedBox(
             width: 42,
             child: ProgressCirculWidget(
-              painter: ProgreesCirculePainter(context: context, percent: 0.70),
+              percent: 0.70,
             ),
           ),
         )
@@ -157,10 +157,10 @@ class WildAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class ProgressCirculWidget extends StatelessWidget {
   final Widget? image;
-  final CustomPainter? painter;
+  final double percent;
 
   const ProgressCirculWidget({
-    required this.painter,
+    required this.percent,
     this.image,
     super.key,
   });
@@ -168,7 +168,7 @@ class ProgressCirculWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: painter,
+      painter: ProgreesCirculePainter(context: context, percent: percent),
       child: Center(
         child: ClipOval(
           clipBehavior: Clip.hardEdge,
