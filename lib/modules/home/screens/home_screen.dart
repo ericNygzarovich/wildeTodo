@@ -127,6 +127,7 @@ class WildAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: IconThemeData(color: context.theme.palette.grayscale.g5),
+      shadowColor: Colors.transparent,
       backgroundColor: context.theme.palette.grayscale.g1,
       title: Text(
         'March 2023',
@@ -168,7 +169,7 @@ class ProgressCirculWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: ProgreesCirculePainter(context: context, percent: percent),
+      painter: _ProgreesCirculePainter(context: context, percent: percent),
       child: Center(
         child: ClipOval(
           clipBehavior: Clip.hardEdge,
@@ -185,11 +186,11 @@ class ProgressCirculWidget extends StatelessWidget {
   }
 }
 
-class ProgreesCirculePainter extends CustomPainter {
+class _ProgreesCirculePainter extends CustomPainter {
   final BuildContext context;
   final double percent;
 
-  ProgreesCirculePainter({
+  _ProgreesCirculePainter({
     required this.context,
     required this.percent,
   });
