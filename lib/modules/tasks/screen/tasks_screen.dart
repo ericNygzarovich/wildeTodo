@@ -13,7 +13,7 @@ class TasksScreen extends StatelessWidget {
       itemBuilder: (context, index) => const Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: Task(
-          status: TaskStatus.failed,
+          status: TaskStatus.success,
           time: '12:00 AM',
           category: 'Importance',
           isPrivat: true,
