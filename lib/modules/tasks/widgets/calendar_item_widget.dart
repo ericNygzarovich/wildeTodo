@@ -13,6 +13,8 @@ class CalendarItemWidget extends StatelessWidget {
   final bool status;
   final bool dotIndecator;
   final CalendarItemStatus stateIndicator;
+  final String dayOfWeek;
+  final int numberOfMounth;
 
   const CalendarItemWidget({
     super.key,
@@ -20,6 +22,8 @@ class CalendarItemWidget extends StatelessWidget {
     this.dotIndecator = false,
     this.status = false,
     required this.stateIndicator,
+    required this.dayOfWeek,
+    required this.numberOfMounth,
   });
 
   @override
@@ -46,13 +50,13 @@ class CalendarItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '24',
+                    '$numberOfMounth',
                     style: (stateIndicator != CalendarItemStatus.muted)
                         ? context.theme.typeface.body2.regular
                         : TextStyle(color: context.theme.palette.grayscale.g5),
                   ),
                   Text(
-                    'Mon',
+                    dayOfWeek,
                     style: (stateIndicator != CalendarItemStatus.muted)
                         ? context.theme.typeface.caption.regular
                         : TextStyle(color: context.theme.palette.grayscale.g5),

@@ -17,23 +17,6 @@ class AppRoot extends StatelessWidget {
         child: HomeNavigationScreen(
           screens: [
             const TasksScreen(),
-            // CustomScrollView(
-            //   slivers: [
-            //     SliverList(
-            //       delegate: SliverChildListDelegate([
-            //         Text(
-            //           "Page 1",
-            //           style: context.theme.typeface.headline,
-            //         ),
-            //         const SizedBox(height: 24),
-            //         Text(
-            //           text1,
-            //           style: context.theme.typeface.body2,
-            //         ),
-            //       ]),
-            //     ),
-            //   ],
-            // ),
             CustomScrollView(
               slivers: [
                 SliverList(

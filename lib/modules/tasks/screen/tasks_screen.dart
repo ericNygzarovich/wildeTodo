@@ -9,26 +9,54 @@ List<CalendarItemModel> calendarItems = const [
   CalendarItemModel(
     stateIndicator: CalendarItemStatus.muted,
     status: true,
+    dayOfWeek: 'sun',
+    numberOfMounth: 24,
   ),
-  CalendarItemModel(stateIndicator: CalendarItemStatus.muted),
+  CalendarItemModel(
+    stateIndicator: CalendarItemStatus.muted,
+    dayOfWeek: 'mon',
+    numberOfMounth: 24,
+  ),
   CalendarItemModel(
     stateIndicator: CalendarItemStatus.muted,
     status: true,
     isSuccses: true,
+    dayOfWeek: 'tue',
+    numberOfMounth: 24,
   ),
   CalendarItemModel(
     stateIndicator: CalendarItemStatus.selected,
     status: true,
     isSuccses: true,
+    dayOfWeek: 'wed',
+    numberOfMounth: 24,
   ),
-  CalendarItemModel(stateIndicator: CalendarItemStatus.normal),
+  CalendarItemModel(
+    stateIndicator: CalendarItemStatus.normal,
+    dayOfWeek: 'thu',
+    numberOfMounth: 24,
+  ),
   CalendarItemModel(
     stateIndicator: CalendarItemStatus.normal,
     dotIndecator: true,
+    dayOfWeek: 'mon',
+    numberOfMounth: 24,
   ),
-  CalendarItemModel(stateIndicator: CalendarItemStatus.normal),
-  CalendarItemModel(stateIndicator: CalendarItemStatus.normal),
-  CalendarItemModel(stateIndicator: CalendarItemStatus.normal),
+  CalendarItemModel(
+    stateIndicator: CalendarItemStatus.normal,
+    dayOfWeek: 'mon',
+    numberOfMounth: 24,
+  ),
+  CalendarItemModel(
+    stateIndicator: CalendarItemStatus.normal,
+    dayOfWeek: 'mon',
+    numberOfMounth: 24,
+  ),
+  CalendarItemModel(
+    stateIndicator: CalendarItemStatus.normal,
+    dayOfWeek: 'mon',
+    numberOfMounth: 24,
+  ),
 ];
 
 class TasksScreen extends StatelessWidget {
@@ -57,6 +85,8 @@ class TasksScreen extends StatelessWidget {
                       dotIndecator: calendarItems[index].dotIndecator!,
                       status: calendarItems[index].status!,
                       isSuccses: calendarItems[index].isSuccses!,
+                      dayOfWeek: calendarItems[index].dayOfWeek,
+                      numberOfMounth: calendarItems[index].numberOfMounth,
                     ),
                   ),
                 ),
@@ -66,21 +96,25 @@ class TasksScreen extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Expanded(
-          child: ListView.separated(
-            itemCount: 4,
-            itemBuilder: (context, index) => const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Task(
-                status: TaskStatus.success,
-                time: '12:00 AM',
-                category: 'Importance',
-                isPrivat: true,
-                isStarred: true,
+          child: CustomScrollView(
+            slivers: [
+              SliverList.separated(
+                itemCount: 10,
+                itemBuilder: (context, index) => const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Task(
+                    status: TaskStatus.success,
+                    time: '12:00 AM',
+                    category: 'Importance',
+                    isPrivat: true,
+                    isStarred: true,
+                  ),
+                ),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 5,
+                ),
               ),
-            ),
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 5,
-            ),
+            ],
           ),
         ),
       ],
