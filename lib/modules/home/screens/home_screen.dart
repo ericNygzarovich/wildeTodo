@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
-import 'package:wildtodo/modules/home/widgets/progress_circule_widget.dart';
+
+import '../widgets/wildAppBar.dart';
 
 enum HomeBottomTabs {
   tasks(0),
@@ -29,10 +29,12 @@ class HomeNavigationScreen extends StatefulWidget {
     super.key,
     required this.screens,
     required this.navigation,
+    required this.floatingActionButton,
   }) : assert(screens.length == navigation.length);
 
   final List<Widget> screens;
   final List<HomeNavigationButtonData> navigation;
+  final FloatingActionButton floatingActionButton;
 
   @override
   State<HomeNavigationScreen> createState() => _HomeNavigationScreenState();
@@ -58,7 +60,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen> {
     await _controller.animateToPage(
       page,
       duration: const Duration(milliseconds: 600),
-      curve: Curves.bounceIn,
+      curve: Curves.easeIn,
     );
   }
 
@@ -70,6 +72,51 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> children = [];
+    for (int page = 0; page < widget.navigation.length; page++) {
+      if (page == 2) {
+        children.add(SizedBox(
+          width: 45,
+          height: 45,
+          child: widget.floatingActionButton,
+        ));
+      }
+      children.add(InkWell(
+        onTap: () => _changePage(page),
+        child: Container(
+          height: 52,
+          decoration: BoxDecoration(
+            color: _currentPage == page ? context.theme.palette.grayscale.g4 : Colors.transparent,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                widget.navigation[page].icon,
+                color: _currentPage == page
+                    ? context.theme.palette.grayscale.g6
+                    : context.theme.palette.grayscale.g5,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.5),
+                child: Text(
+                  widget.navigation[page].title,
+                  style: context.theme.typeface.caption.copyWith(
+                    color: _currentPage == page
+                        ? context.theme.palette.grayscale.g6
+                        : context.theme.palette.grayscale.g5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ));
+    }
+
     return Scaffold(
       backgroundColor: context.theme.palette.grayscale.g1,
       drawer: const Drawer(),
@@ -94,59 +141,12 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen> {
               ),
             ]),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                for (int page = 0; page < widget.navigation.length; page++)
-                  IconButton(
-                    onPressed: () => _changePage(page),
-                    icon: Icon(
-                      widget.navigation[page].icon,
-                      color: _currentPage == page
-                          ? context.theme.palette.grayscale.g6
-                          : context.theme.palette.grayscale.g5,
-                    ),
-                  ),
-              ],
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: children,
             ),
           ),
         ],
       ),
     );
   }
-}
-
-class WildAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const WildAppBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      iconTheme: IconThemeData(color: context.theme.palette.grayscale.g5),
-      shadowColor: Colors.transparent,
-      backgroundColor: context.theme.palette.grayscale.g1,
-      title: Text(
-        'March 2023',
-        style: context.theme.typeface.subheading.bold,
-      ),
-      actions: [
-        Icon(
-          CupertinoIcons.bell_fill,
-          color: context.theme.palette.grayscale.g5,
-          size: 16,
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 7, 24, 7),
-          child: SizedBox(
-            width: 42,
-            child: ProgressCirculWidget(percent: 0.72),
-          ),
-        )
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size(double.infinity, 60);
 }
