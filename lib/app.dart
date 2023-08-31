@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
 import 'package:wildtodo/modules/home/screens/home_screen.dart';
+import 'package:wildtodo/modules/tasks/screen/tasks_screen.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -15,23 +16,7 @@ class AppRoot extends StatelessWidget {
       home: SafeArea(
         child: HomeNavigationScreen(
           screens: [
-            CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Text(
-                      "Page 1",
-                      style: context.theme.typeface.headline,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      text1,
-                      style: context.theme.typeface.body2,
-                    ),
-                  ]),
-                ),
-              ],
-            ),
+            const TasksScreen(),
             CustomScrollView(
               slivers: [
                 SliverList(
