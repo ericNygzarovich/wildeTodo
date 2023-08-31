@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
 import 'package:wildtodo/modules/home/screens/home_screen.dart';
@@ -71,10 +72,15 @@ class AppRoot extends StatelessWidget {
               ],
             ),
           ],
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: context.theme.palette.accent.primary.vivid,
+            child: const Icon(Icons.add),
+          ),
           navigation: const [
             HomeNavigationButtonData(
               title: "Tasks",
-              icon: Icons.message,
+              icon: Icons.task,
             ),
             HomeNavigationButtonData(
               title: "Messsages",
@@ -82,11 +88,11 @@ class AppRoot extends StatelessWidget {
             ),
             HomeNavigationButtonData(
               title: "Friends",
-              icon: Icons.message,
+              icon: Icons.people,
             ),
             HomeNavigationButtonData(
               title: "Notifications",
-              icon: Icons.message,
+              icon: CupertinoIcons.bell_fill,
             ),
           ],
         ),
