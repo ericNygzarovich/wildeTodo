@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wildtodo/core/core_utils.dart';
+import 'package:wildtodo/modules/home/widgets/progress_circule_widget.dart';
 
 enum HomeBottomTabs {
   tasks(0),
@@ -139,6 +140,7 @@ class WildAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.fromLTRB(16, 7, 24, 7),
           child: SizedBox(
             width: 42,
+            child: ProgressCirculWidget(percent: 0.72),
           ),
         )
       ],

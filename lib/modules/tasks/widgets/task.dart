@@ -9,6 +9,7 @@ enum TaskStatus {
   undone,
   success,
   failed,
+  event,
 }
 
 class Task extends StatelessWidget {
@@ -16,8 +17,8 @@ class Task extends StatelessWidget {
   final String time;
   final String category;
   final bool isPrivat;
-
   final bool isStarred;
+  final String nameOfTask;
 
   const Task({
     super.key,
@@ -26,6 +27,7 @@ class Task extends StatelessWidget {
     required this.category,
     required this.isStarred,
     required this.time,
+    required this.nameOfTask,
   });
 
   @override
@@ -41,28 +43,29 @@ class Task extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: isPrivat
-                  ? Colors.transparent
-                  : context.theme.palette.status.negative.vivid,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: isPrivat
-                ? Icon(
-                    CupertinoIcons.eye_slash_fill,
-                    color: context.theme.palette.grayscale.g5,
-                  )
-                : SvgPicture.asset('assets/icons/task.svg'),
-          ),
+          status == TaskStatus.event
+              ? SvgPicture.asset('assets/icons/event.svg')
+              : Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isPrivat ? Colors.transparent : context.theme.palette.status.negative.vivid,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: isPrivat
+                      ? Icon(
+                          CupertinoIcons.eye_slash_fill,
+                          color: context.theme.palette.grayscale.g5,
+                        )
+                      : SvgPicture.asset('assets/icons/task.svg'),
+                ),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Learn 655 words at summer',
+                  nameOfTask,
                   textAlign: TextAlign.start,
                   style: context.theme.typeface.body2.medium.copyWith(
                     color: context.theme.palette.grayscale.g6,
@@ -85,7 +88,7 @@ class Task extends StatelessWidget {
               ],
             ),
           ),
-          TaskStatusWidget(status: status),
+          if (status != TaskStatus.event) TaskStatusWidget(status: status),
           const SizedBox(width: 16)
         ],
       ),
